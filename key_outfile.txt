@@ -1,0 +1,3 @@
+a:e b:r c:y d:k e:v f:b g:j h:f i:o
+j:t k:a l:u m:h n:c o:p p:i q:x r:s
+s:z t:l u:w v:d w:q x:n y:g z:m  : 
