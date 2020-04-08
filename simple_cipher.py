@@ -75,12 +75,15 @@ if (choice == 1):
 if (choice == 2):
    
 
-    def data_to_encrypt(cipher_text_file, key_file):
+    def data_to_decrypt():
+       
         running = True
         while running:
+            cipher_file_name = input('Enter the name of the file with cipher text in it: ')
+            key_file_name = input('Enter the name of the file with key in it: ')
             try:
-                cipher_text_file = open(cipher_text_file, 'r')
-                key_file= open(key_file, 'r')
+                cipher_text_file = open(cipher_file_name, 'r')
+                key_file= open(key_file_name, 'r')
                 running = False
             except IOError:
                 print('Could not open the file try again.')
@@ -92,38 +95,26 @@ if (choice == 2):
 
         key_data_final = ''.join(map(str, key_data))
         key_data_final = key_data_final.lower()
-
-        #We want to strip all elements in this list
         undelimited_line = [s.strip(':') for s in key_data_final]
-        # undelimited_line1 = [s.strip('') for s in undelimited_line]
         stripped_line = [s.rstrip() for s in undelimited_line]
-        # key_data_final = stripped_line.split(':')
-        # print(stripped_line)
+        
 
         character_list = stripped_line[::4]
         value_list = stripped_line[2::4]
         character_dictionary = dict(zip(character_list, value_list))
-        print(character_dictionary)
-        # print(character_list)
-        # print(value_list)
 
-#list(character_dictionary.keys())[list(character_dictionary.values()).index(char)]
+        plain_text = list()
         for char in cipher_data_final:
-            plain_text = list()
-            if (char in character_dictionary.values()):
-                plain_text.append(character_dictionary.keys().index(char))
-        print(plain_text)
-        # plain_text_string = ''.join(map(str, plain_text))
-        # return plain_text_string
+            for key, value in character_dictionary.items():
+                if(char == value):
+                    plain_text.append(key)
+        
 
+        plain_text_string = ''.join(map(str, plain_text))
+        print('The decrypted text is: ' + plain_text_string)
+        
 
-        print('The cipher data is:' + cipher_data_final)
-        # print('The key data is: \n' + key_data_final)
-
-        # for c in cipher_data_final:
-        #     if(c in )
-
-    print(data_to_encrypt('cipher_outfile.txt', 'key_outfile.txt'))
+data_to_decrypt()
     
 
 
