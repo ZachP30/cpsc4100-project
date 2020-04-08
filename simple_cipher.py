@@ -25,7 +25,6 @@ if (choice == 1):
         except IOError:
             print('Could not open the file try again.')
             
-
     data_to_encrypt = input_file.readlines()
     string_data = ''.join(map(str, data_to_encrypt))
     string_data = string_data.lower()
@@ -72,9 +71,8 @@ if (choice == 1):
     cipher_outfile = open('cipher_outfile.txt', 'w')
     cipher_outfile.write(encrypt(string_data_final, character_dictionary))
 
-if (choice == 2):
-   
 
+if (choice == 2):
     def data_to_decrypt():
        
         running = True
@@ -90,8 +88,11 @@ if (choice == 2):
 
         cipher_data = cipher_text_file.readlines()
         key_data = key_file.readlines()
-        cipher_data_final = ''.join(map(str, cipher_data))
-        cipher_data_final = cipher_data_final.lower()
+        cipher_data_str = ''.join(map(str, cipher_data))
+        cipher_data_str = cipher_data_str.lower()
+        whitelist = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+        cipher_data_final = ''.join(filter(whitelist.__contains__, cipher_data_str))
+        print(cipher_data_final)
 
         key_data_final = ''.join(map(str, key_data))
         key_data_final = key_data_final.lower()
@@ -102,6 +103,9 @@ if (choice == 2):
         character_list = stripped_line[::4]
         value_list = stripped_line[2::4]
         character_dictionary = dict(zip(character_list, value_list))
+        character_dictionary[' '] = ' '
+        del character_dictionary['']
+        print(character_dictionary)
 
         plain_text = list()
         for char in cipher_data_final:
@@ -109,12 +113,10 @@ if (choice == 2):
                 if(char == value):
                     plain_text.append(key)
         
-
         plain_text_string = ''.join(map(str, plain_text))
         print('The decrypted text is: ' + plain_text_string)
-        
 
-data_to_decrypt()
+    data_to_decrypt()
     
 
 
