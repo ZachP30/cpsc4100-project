@@ -23,6 +23,8 @@ function buildTranslation(arr1,arr2) {
 }
 
 function encode(msg) {
+    // TODO:
+    //     Add space character to this dictionary, map space:space
     let alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",
                     "q","r","s","t","u","v","w","x","y","z"];
     let cipher = shuffleArr(alphabet);
@@ -32,10 +34,10 @@ function encode(msg) {
     //console.log(mapping);
     let result = "";
     for (let index = 0; index < input.length; index++) {
-        
+
         cur = mapping[input.charAt(index)];
         //console.log(input.charAt(index) + cur);
-        if (cur != undefined) 
+        if (cur != undefined)
         {
             result+=cur;
         }
@@ -47,7 +49,8 @@ function encode(msg) {
     }
     console.log(input);
     console.log(result);
-
+    // TODO:
+    //     Save both files to disc
 
 
 
