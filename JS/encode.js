@@ -1,13 +1,21 @@
 var fs = require("fs");
-var async = require('async');
 
-function getFileContents(filePath) {
+
+function getfile(filePath) {
     return fs.readFileSync(filePath, 'utf-8').toString();
 };
 
 function shuffleArr(array) {
     return array.slice().sort(() => Math.random() - 0.5);
 }
+
+// function saveKey(dict){
+//     var holder = "";
+//     for (let index = 0; index < dict.length; index++) {
+        
+        
+//     }
+// }
 
 function buildTranslation(arr1,arr2) {
     // these arrays are the same length, that is why I used
@@ -28,7 +36,7 @@ function encode(msg) {
     let alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",
                     "q","r","s","t","u","v","w","x","y","z"];
     let cipher = shuffleArr(alphabet);
-    let input= getFileContents("input.txt").toLowerCase();
+    let input= getfile("input.txt").toLowerCase();
 
     let mapping = buildTranslation(alphabet,cipher);
     //console.log(mapping);
@@ -47,12 +55,17 @@ function encode(msg) {
         }
         // console.log(cur);
     }
-    console.log(input);
-    console.log(result);
-    // TODO:
-    //     Save both files to disc
-
-
+    keyoutput = "";
+    mapping[" "] = " ";
+    // console.log(input);
+    for (var key in mapping) {
+        if (mapping.hasOwnProperty(key)) {
+            keyoutput = keyoutput + key+":"+mapping[key] +"\n";
+        }
+    }
+    // console.log(result);
+    fs.writeFileSync("encMessage.txt",result);
+    fs.writeFileSync("keyM.txt",keyoutput);
 
 }
 

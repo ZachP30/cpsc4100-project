@@ -1,19 +1,14 @@
 var fs = require("fs");
-var async = require('async');
 
-
-
-function getFileContents(filePath) {
+function getfile(filePath) {
     return fs.readFileSync(filePath, 'utf-8').toString();
 };
 
-
-
 function decodeArray(arr,key) {
     decodedMessage = "";
-    let file = getFileContents("key.txt");
-    let message = getFileContents("message.txt");
-    filedict = file.split(/\r?\n/);
+    let file = getfile("keyM.txt");
+    let message = getfile("encMessage.txt");
+    filedict = file.split(/\r?\n/); // reg ex to split into the dictionary
     realdict = {}
     for (let index = 0; index < filedict.length; index++) {
         pair = filedict[index].split(":");
@@ -26,7 +21,8 @@ function decodeArray(arr,key) {
         decodedMessage = decodedMessage + realdict[message[index]]
         
     }
-console.log(decodedMessage)
+console.log(message);
+console.log(decodedMessage);
     // for (let index = 0; index < message.length; index++) {
     //     // message = message.replace(message[index],dict[message[index]])
     //     console.log(message[index])
@@ -36,6 +32,7 @@ console.log(decodedMessage)
     // console.log(dict)
     // message = message.replace("m",dict[m])
     // console.log(message)
+fs.writeFileSync("decM.txt",decodedMessage);
 }
 
 decodeArray();
